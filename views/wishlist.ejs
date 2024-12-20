@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - AI Book Finder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+    
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            font-size: 16px;
+        }
+    
+        .navbar {
+            padding: 15px;
+            background-color: #1a73e8;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        .navbar a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+    
+        .wishlist-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #1a73e8;
+        }
+    
+        .wishlist-header {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
+    
+        .wishlist-container ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+    
+        /* Animation for List Items */
+        .wishlist-container li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 8px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+    
+        /* Define the animation */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+        /* Add a delay for each list item */
+        .wishlist-container li:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+    
+        .wishlist-container li:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+    
+        .wishlist-container li:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+    
+        .wishlist-container li:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+    
+   
+    
+        .wishlist-container button {
+            padding: 8px 12px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    
+        .wishlist-container button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="navbar">
+        <a href="/home">Home</a>
+        <a href="/wishlist">Wishlist</a>
+        <a href="/profile">Profile</a>
+        <a href="/login">Login</a>
+    </div>
+
+    <div class="wishlist-container">
+        <div class="wishlist-header">Your Wishlist</div>
+        <ul id="wishlist"></ul>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // Retrieve the wishlist from localStorage
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            
+            // Debugging: Check what wishlist is retrieved from localStorage
+            console.log('Wishlist from localStorage:', wishlist);
+            
+            const wishlistContainer = document.getElementById('wishlist');
+
+            if (wishlist.length === 0) {
+                wishlistContainer.innerHTML = '<li>No books added yet!</li>';
+            } else {
+                wishlist.forEach((book, index) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span>${book}</span>
+                        <button onclick="removeBook(${index})">Remove</button>
+                    `;
+                    wishlistContainer.appendChild(li);
+                });
+            }
+        };
+
+        function removeBook(index) {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            wishlist.splice(index, 1);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            location.reload();
+        }
+    </script>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .navbar {
+            padding: 15px;
+            background-color: #1a73e8;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .wishlist-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #1a73e8;
+        }
+
+        .wishlist-header {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .wishlist-container ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .wishlist-container li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 8px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .wishlist-container button {
+            padding: 8px 12px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .wishlist-container button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/home">Home</a>
+        <a href="/wishlist">Wishlist</a>
+        <a href="/profile">Profile</a>
+        <a href="/login">Login</a>
+    </div>
+
+    <div class="wishlist-container">
+        <div class="wishlist-header">Your Wishlist</div>
+        <ul id="wishlist">
+  
+        </ul>
+    </div>
+
+    <script>
+        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+        function displayWishlist() {
+            const wishlistElement = document.getElementById('wishlist');
+            wishlistElement.innerHTML = '';
+            wishlist.forEach((book, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${book}</span>
+                    <button onclick="removeFromWishlist(${index})">Remove</button>
+                `;
+                wishlistElement.appendChild(li);
+            });
+        }
+
+        function removeFromWishlist(index) {
+            wishlist.splice(index, 1);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            displayWishlist();
+        }
+
+        displayWishlist();
+    </script>
+</body>
+</html> -->

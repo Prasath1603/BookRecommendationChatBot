@@ -1,0 +1,340 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Book Finder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .navbar {
+            padding: 15px;
+            background-color: #1a73e8;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .chat-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #1a73e8;
+        }
+
+        .chat-header {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .chat-body {
+            padding: 15px;
+            max-height: 350px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 12px;
+            width: 80%;
+        }
+
+        .user-message {
+            background-color: #e6f3ff;
+            text-align: right;
+            margin-left: auto;
+        }
+
+        .bot-message {
+            background-color: #f1f3f4;
+            text-align: left;
+        }
+
+        .input-area {
+            display: flex;
+            padding: 12px 0;
+            border-top: 1px solid #ddd;
+            justify-content: space-between;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 12px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+
+        .input-area input:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+
+        .input-area button {
+            padding: 12px;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .input-area button:hover {
+            background-color: #155ab4;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="wishlist.html">Wishlist</a>
+        <a href="profile.html">Profile</a>
+        <a href="login.html">Login</a>
+    </div>
+
+    <div class="chat-container">
+        <div class="chat-header">AI Book Finder</div>
+        <div class="chat-body" id="chatBody">
+            <div class="bot-message">What kind of book are you looking for?</div>
+        </div>
+        <div class="input-area">
+            <input type="text" id="promptInput" placeholder="Type your message here..." />
+            <button id="sendButton">Send</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        function convertMarkdown(botMessage) {
+            const htmlOutput = marked.parse(botMessage);
+            document.getElementById('chatBody').innerHTML += htmlOutput;
+        }
+
+        document.getElementById('sendButton').addEventListener('click', async () => {
+            const input = document.getElementById('promptInput');
+            const userMessage = input.value;
+            
+            if (userMessage) {
+                const chatBody = document.getElementById('chatBody');
+                chatBody.innerHTML += `<div class="message user-message">${userMessage}</div>`;
+                input.value = '';
+                let query = "Suggest me some books related to the topic of " + userMessage + " and give the result in English.";
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: query })
+                });
+                const data = await response.json();
+                const botMessage = data.response;
+                convertMarkdown(botMessage);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Book Finder</title>
+    <style>
+      * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+li::before{
+  content: '     ' !important;
+}
+
+body {
+    background-color: #f3f4f6;
+    color: #333;
+}
+
+.navbar {
+    padding: 15px;
+    background-color: #1a73e8;
+    text-align: center;
+}
+
+.navbar a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.chat-body {
+    padding: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+.user-message {
+    background-color: #e6f3ff;
+    text-align: right;
+    margin-left: auto;
+}
+
+.bot-message {
+    background-color: #f1f3f4;
+    text-align: left;
+}
+
+.input-area {
+    display: flex;
+    padding: 10px 0;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.input-area button {
+    padding: 10px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    </style>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="wishlist.html">Wishlist</a>
+        <a href="profile.html">Profile</a>
+        <a href="login.html">Login</a>
+    </div>
+
+    <div class="chat-container">
+        <div class="chat-header">AI Book Finder</div>
+        <div class="chat-body" id="chatBody">
+            <div class="bot-message">What kind of book are you looking for?</div>
+        </div>
+        <div class="input-area">
+            <input type="text" id="promptInput" placeholder="Type your message here..." />
+            <button id="sendButton">Send</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+
+        function convertMarkdown(botMessage) {
+            const htmlOutput = marked.parse(botMessage); // Convert Markdown to HTML
+            chatBody.innerHTML += htmlOutput; // Display HTML
+        }
+
+        document.getElementById('sendButton').addEventListener('click', async () => {
+            const input = document.getElementById('promptInput');
+            const userMessage = input.value;
+            
+            if (userMessage) {
+                const chatBody = document.getElementById('chatBody');
+                chatBody.innerHTML += `<div class="message user-message">${userMessage}</div>`;
+                input.value = '';
+                let query = "Suggest me some books related to the topic of " + userMessage + " and give the result in english. Also do not include 'sure,here are the...' and stuff like that, just give me pure output."
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: query })
+                });
+                const data = await response.json();
+                const botMessage = data.response.parts[0].text;
+                console.log(data);
+                convertMarkdown(botMessage,chatBody)
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>

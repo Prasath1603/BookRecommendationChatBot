@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .navbar {
+            padding: 15px;
+            background-color: #1a73e8;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .profile-container {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #1a73e8;
+        }
+
+        .profile-header {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .profile-info {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            margin-bottom: 12px;
+        }
+    </style>
+    <title>Profile</title>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="/home">Chat</a>
+      <a href="/profile">Profile</a>
+      <a href="/wishlist">Wishlist</a>
+      <a href="/login">Login</a>
+      <a href="/signup">Sign Up</a>
+    </div>
+    <div class="profile-container">
+      <h2 class="profile-header">Profile</h2>
+      <div class="profile-details">
+        <p><strong>Name:</strong> <span id="profileName"></span></p>
+        <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+        <p><strong>Password:</strong> <span id="profilePassword"></span></p>
+      </div>
+    </div>
+    <script>
+        window.onload = function() {
+            // Retrieve the user data from localStorage
+            const username = localStorage.getItem('username');
+            const email = localStorage.getItem('email');
+            const password = localStorage.getItem('password');
+
+            // Display the data in the profile page
+            if (username && email && password) {
+                document.getElementById('profileName').textContent = username;
+                document.getElementById('profileEmail').textContent = email;
+                document.getElementById('profilePassword').textContent = password;
+            } else {
+                alert('No user data found. Please sign up first.');
+            }
+        };
+    </script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .navbar {
+            padding: 15px;
+            background-color: #1a73e8;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .profile-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #1a73e8;
+        }
+
+        .profile-header {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .profile-info {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="wishlist.html">Wishlist</a>
+        <a href="profile.html">Profile</a>
+        <a href="login.html">Login</a>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-header">Profile Information</div>
+        <div class="profile-info">
+            <strong>Name:</strong> User1
+        </div>
+        <div class="profile-info">
+            <strong>Email:</strong> user1@gmail.com
+        </div>
+    </div>
+</body>
+</html> -->
